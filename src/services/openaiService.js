@@ -1,9 +1,13 @@
 import OpenAI from "openai";
-import fetch from "node-fetch"; // <- thêm dòng này
+import fetch, { Headers } from "node-fetch";
+
+if (!globalThis.Headers) {
+  globalThis.Headers = Headers;
+}
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
-  fetch: fetch, // <- thêm fetch vào đây
+  fetch: fetch, // sử dụng node-fetch
 });
 
 const askChatGPT = async (userMessage) => {
