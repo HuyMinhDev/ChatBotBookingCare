@@ -1,3 +1,4 @@
+require("dotenv").config(); // load biến môi trường
 import OpenAI from "openai";
 import fetch, { Headers } from "node-fetch";
 
