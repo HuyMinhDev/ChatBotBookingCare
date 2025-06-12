@@ -1,9 +1,16 @@
 require("dotenv").config(); // load biến môi trường
+
 import OpenAI from "openai";
 import fetch, { Headers } from "node-fetch";
+import Blob from "fetch-blob";
 
+// Gắn Headers và Blob vào globalThis nếu chưa có
 if (!globalThis.Headers) {
   globalThis.Headers = Headers;
+}
+
+if (typeof globalThis.Blob === "undefined") {
+  globalThis.Blob = Blob;
 }
 
 const openai = new OpenAI({
