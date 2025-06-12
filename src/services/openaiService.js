@@ -1,4 +1,4 @@
-require("dotenv").config(); // Load biến môi trường
+require("dotenv").config();
 
 import OpenAI from "openai";
 import fetch, { Headers } from "node-fetch";
@@ -7,28 +7,31 @@ if (!globalThis.Headers) {
   globalThis.Headers = Headers;
 }
 
-// Hàm async để load Blob bằng dynamic import
-const loadBlob = async () => {
+let openaiInstance;
+
+const initOpenAI = async () => {
   const { default: Blob } = await import("fetch-blob");
-  if (typeof globalThis.Blob === "undefined") {
+  if (!globalThis.Blob) {
     globalThis.Blob = Blob;
   }
+
+  openaiInstance = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+    fetch: fetch,
+  });
 };
 
-// Gọi loadBlob trước khi khởi tạo OpenAI
-await loadBlob();
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-  fetch: fetch,
-});
-
 const askChatGPT = async (userMessage) => {
+  if (!openaiInstance) {
+    await initOpenAI(); // chỉ khởi tạo khi cần
+  }
+
   try {
-    const response = await openai.chat.completions.create({
+    const response = await openaiInstance.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [{ role: "user", content: userMessage }],
     });
+
     return response.choices[0].message.content;
   } catch (error) {
     console.error("OpenAI error:", error);
