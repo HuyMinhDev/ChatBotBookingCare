@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello With Minh Huy</title>
+
+    <!-- Facebook SDK -->
+    <div id="fb-root"></div>
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js"
+    ></script>
+  </head>
+  <body>
+    <h1>Hello World Minh Huy</h1>
+    <form method="POST" action="/setup-profile">
+      <button type="submit">Setup profile</button>
+    </form>
+    <br />
+    <form method="POST" action="/setup-persistent-menu">
+      <button type="submit">Setup persistent menu</button>
+    </form>
+
+    <!-- Nút mở Messenger bằng liên kết -->
+    <div
+      onclick="window.open('https://www.messenger.com/t/61576906725592/', '_blank')"
+      style="
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #0078ff;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 30px;
+        font-weight: bold;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        z-index: 999;
+      "
+    >
+      💬 Chat với chúng tôi qua Messenger
+    </div>
+
+    <!-- <div
+      class="fb-customerchat"
+      attribution="setup_tool"
+      page_id="61576979074536"
+      theme_color="#0078ff"
+      logged_in_greeting="Xin chào! Tôi có thể giúp gì cho bạn?"
+      logged_out_greeting="Xin chào! Hãy đăng nhập để trò chuyện với chúng tôi."
+    ></div>
+    
+    <script type="text/javascript">
+      var Tawk_API = Tawk_API || {},
+        Tawk_LoadStart = new Date();
+      (function () {
+        var s1 = document.createElement("script"),
+          s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = "https://embed.tawk.to/68455e25cb587d190aaab11f/1it7ffh8a";
+        s1.charset = "UTF-8";
+        s1.setAttribute("crossorigin", "*");
+        s0.parentNode.insertBefore(s1, s0);
+      })();
+    </script> -->
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId: "61576979074536",
+          xfbml: true,
+          version: "v17.0",
+        });
+      };
+      (function (d, s, id) {
+        var js,
+          fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/vi_VN/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      })(document, "script", "facebook-jssdk");
+    </script>
+    <div
+      class="fb-customerchat"
+      attribution="setup_tool"
+      page_id="61576979074536"
+      theme_color="#0078ff"
+      logged_in_greeting="Xin chào! Tôi có thể giúp gì cho bạn?"
+      logged_out_greeting="Xin chào! Hãy đăng nhập để trò chuyện với chúng tôi."
+    ></div>
+  </body>
+</html>
