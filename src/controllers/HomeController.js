@@ -267,6 +267,10 @@ async function handlePostback(sender_psid, received_postback) {
     case "BACK_TO_MAIN_MENU_SPECIALTY":
       await chatbotService.handleBackToMainMenuSpecialty(sender_psid);
       break;
+
+    case "SHOW_ROOMS":
+      await chatbotService.handleShowDetailRooms(sender_psid);
+      break;
     default:
       response = { text: `Unknown postback payload. ${payload}` };
   }

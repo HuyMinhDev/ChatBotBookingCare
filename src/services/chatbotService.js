@@ -2,6 +2,10 @@ import request from "request";
 require("dotenv").config();
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
+const IMAGE_DETAIL_ROOMS =
+  "https://th-thumbnailer.cdn-si-edu.com/9EoIpbAuj6hc9tNmbRNy03iTVJI=/1072x720/filters:no_upscale()/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b4/c6/b4c65fd0-01ba-4262-9b3d-f16b53bca617/istock-172463472.jpg";
+const IMAGE_HOSPITAL_SPACE =
+  "https://www.imh.ae/wp-content/gallery/hosptal/Sequence-01.00_01_49_20.Still011.jpg";
 const IMAGE_GET_STARTED = "https://bit.ly/3HsPEXN";
 const IMAGE_GUIDE_TO_USE_BOT = "https://bit.ly/4jNjHqS";
 const IMAGE_COME_BACK =
@@ -253,6 +257,19 @@ let sendGetStartedTemplate = (sender_psid) => {
                 type: "postback",
                 title: "HƯỚNG DẪN SỬ DỤNG BOT",
                 payload: "GUIDE_TO_USE_BOT",
+              },
+            ],
+          },
+          {
+            title: "Không gian bệnh viện",
+            subtitle:
+              "Khám phá cơ sở vật chất hiện đại và không gian tiện nghi của các bệnh viện.",
+            image_url: IMAGE_HOSPITAL_SPACE,
+            buttons: [
+              {
+                type: "postback",
+                title: "Chi tiết",
+                payload: "SHOW_ROOMS",
               },
             ],
           },
@@ -713,6 +730,60 @@ let handleBackToMainMenuSpecialty = (sender_psid) => {
     }
   });
 };
+let getImageRoomsTemplate = () => {
+  let response = {
+    attachment: {
+      type: "image",
+      payload: {
+        url: IMAGE_DETAIL_ROOMS,
+        is_reusable: true,
+      },
+    },
+  };
+  return response;
+};
+let getButtonRoomsTemplate = () => {
+  let response = {
+    attachment: {
+      type: "template",
+      payload: {
+        template_type: "button",
+        text: "Bệnh viện có thể ",
+        buttons: [
+          {
+            type: "postback",
+            title: "Đặt lịch",
+            payload: "RESERVE_SCHDULE",
+          },
+          {
+            type: "postback",
+            title: "Quay lại menu chính",
+            payload: "GET_STARTED",
+          },
+        ],
+      },
+    },
+  };
+  return response;
+};
+let handleShowDetailRooms = (sender_psid) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      //send an image
+      let response1 = getImageRoomsTemplate(sender_psid);
+      //send a button templates: text, buttons
+      let response2 = getButtonRoomsTemplate(sender_psid);
+      //send text message
+      await callSendAPI(sender_psid, response1);
+      await callSendAPI(sender_psid, response2);
+      //send generic template message
+      resolve("done");
+    } catch (error) {
+      console.error("Error in handleBackToMainMenu:", error);
+      reject(error);
+    }
+  });
+};
 module.exports = {
   handleGetStarted: handleGetStarted,
   callSendAPI: callSendAPI,
@@ -723,4 +794,5 @@ module.exports = {
   handleSendClinicChatbot: handleSendClinicChatbot,
   handleBackToMainMenuClinic: handleBackToMainMenuClinic,
   handleBackToMainMenuSpecialty: handleBackToMainMenuSpecialty,
+  handleShowDetailRooms: handleShowDetailRooms,
 };
