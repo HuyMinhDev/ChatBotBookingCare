@@ -94,6 +94,35 @@ let getUserName = (sender_psid) => {
   });
 };
 
+let sendTypingOn = (sender_psid, response) => {
+  return new Promise((resolve, reject) => {
+    let request_body = {
+      recipient: {
+        id: sender_psid,
+      },
+      sender_action: "typing_on",
+    };
+
+    request(
+      {
+        uri: "https://graph.facebook.com/v21.0/me/messages",
+        qs: { access_token: PAGE_ACCESS_TOKEN },
+        method: "POST",
+        json: request_body,
+      },
+      (err, res, body) => {
+        if (!err) {
+          console.log("message sent!");
+          resolve("message sent");
+        } else {
+          console.error("Unable to send message:" + err);
+          reject(err);
+        }
+      }
+    );
+  });
+};
+
 let handleGetStarted = (sender_psid) => {
   return new Promise(async (resolve, reject) => {
     try {
