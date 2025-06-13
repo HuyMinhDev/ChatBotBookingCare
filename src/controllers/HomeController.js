@@ -50,65 +50,65 @@ let getHomePage = (req, res) => {
 //   }
 //   console.log(webhook_event);
 // };
-// let postWebhook = (req, res) => {
-//   let body = req.body;
-
-//   // ✅ In toàn bộ body nhận được từ Facebook để debug
-//   console.log("🌐 Webhook received:");
-//   console.log(JSON.stringify(body, null, 2)); // in đẹp JSON
-
-//   // Check the webhook event is from a page subscription
-//   if (body.object === "page") {
-//     body.entry.forEach(function (entry) {
-//       let webhook_event = entry.messaging[0];
-
-//       // ✅ Log chi tiết từng event
-//       console.log("📨 Incoming message event:", webhook_event);
-
-//       let sender_psid = webhook_event.sender.id;
-//       console.log("👤 Sender PSID:", sender_psid);
-
-//       if (webhook_event.message) {
-//         handleMessage(sender_psid, webhook_event.message);
-//       } else if (webhook_event.postback) {
-//         handlePostback(sender_psid, webhook_event.postback);
-//       }
-//     });
-
-//     res.status(200).send("EVENT_RECEIVED");
-//   } else {
-//     res.sendStatus(404);
-//   }
-
-//   // ❌ KHÔNG đặt console.log(webhook_event) ở đây vì biến không tồn tại
-// };
-let postWebhook = async (req, res) => {
+let postWebhook = (req, res) => {
   let body = req.body;
 
+  // ✅ In toàn bộ body nhận được từ Facebook để debug
   console.log("🌐 Webhook received:");
-  console.log(JSON.stringify(body, null, 2));
+  console.log(JSON.stringify(body, null, 2)); // in đẹp JSON
 
+  // Check the webhook event is from a page subscription
   if (body.object === "page") {
-    for (let entry of body.entry) {
+    body.entry.forEach(function (entry) {
       let webhook_event = entry.messaging[0];
 
+      // ✅ Log chi tiết từng event
       console.log("📨 Incoming message event:", webhook_event);
 
       let sender_psid = webhook_event.sender.id;
       console.log("👤 Sender PSID:", sender_psid);
 
       if (webhook_event.message) {
-        await handleMessage(sender_psid, webhook_event.message); // ✅ Dùng được await
+        handleMessage(sender_psid, webhook_event.message);
       } else if (webhook_event.postback) {
         handlePostback(sender_psid, webhook_event.postback);
       }
-    }
+    });
 
     res.status(200).send("EVENT_RECEIVED");
   } else {
     res.sendStatus(404);
   }
+
+  // ❌ KHÔNG đặt console.log(webhook_event) ở đây vì biến không tồn tại
 };
+// let postWebhook = async (req, res) => {
+//   let body = req.body;
+
+//   console.log("🌐 Webhook received:");
+//   console.log(JSON.stringify(body, null, 2));
+
+//   if (body.object === "page") {
+//     for (let entry of body.entry) {
+//       let webhook_event = entry.messaging[0];
+
+//       console.log("📨 Incoming message event:", webhook_event);
+
+//       let sender_psid = webhook_event.sender.id;
+//       console.log("👤 Sender PSID:", sender_psid);
+
+//       if (webhook_event.message) {
+//         await handleMessage(sender_psid, webhook_event.message); // ✅ Dùng được await
+//       } else if (webhook_event.postback) {
+//         handlePostback(sender_psid, webhook_event.postback);
+//       }
+//     }
+
+//     res.status(200).send("EVENT_RECEIVED");
+//   } else {
+//     res.sendStatus(404);
+//   }
+// };
 
 let getWebhook = (req, res) => {
   let VERIFY_TOKEN = process.env.VERIFY_TOKEN;
