@@ -40,14 +40,15 @@ const IMAGE_CLINIC_8 =
   "https://hd1.hotdeal.vn/images/uploads/2015/05/27/146101/146101-cham-soc-da-mun-body-%20%2820%29.JPG";
 
 let callSendAPI = (sender_psid, response) => {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     let request_body = {
       recipient: {
         id: sender_psid,
       },
       message: response,
     };
-
+    await sendMarkReadMessage(sender_psid);
+    await sendTypingOn(sender_psid);
     request(
       {
         uri: "https://graph.facebook.com/v21.0/me/messages",
@@ -112,8 +113,8 @@ let sendTypingOn = (sender_psid, response) => {
       },
       (err, res, body) => {
         if (!err) {
-          console.log("message sent!");
-          resolve("message sent");
+          console.log("sendTypingOn sent!");
+          resolve("sendTypingOn sent");
         } else {
           console.error("Unable to send message:" + err);
           reject(err);
@@ -122,7 +123,34 @@ let sendTypingOn = (sender_psid, response) => {
     );
   });
 };
+let sendMarkReadMessage = (sender_psid, response) => {
+  return new Promise((resolve, reject) => {
+    let request_body = {
+      recipient: {
+        id: sender_psid,
+      },
+      sender_action: "mark_seen",
+    };
 
+    request(
+      {
+        uri: "https://graph.facebook.com/v21.0/me/messages",
+        qs: { access_token: PAGE_ACCESS_TOKEN },
+        method: "POST",
+        json: request_body,
+      },
+      (err, res, body) => {
+        if (!err) {
+          console.log("sendTypingOn sent!");
+          resolve("sendTypingOn sent");
+        } else {
+          console.error("Unable to send message:" + err);
+          reject(err);
+        }
+      }
+    );
+  });
+};
 let handleGetStarted = (sender_psid) => {
   return new Promise(async (resolve, reject) => {
     try {
