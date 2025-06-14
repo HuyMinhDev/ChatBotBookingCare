@@ -84,9 +84,7 @@
             <div class="invalid-feedback">Số điện thoại không hợp lệ.</div>
           </div>
           <div class="mb-3">
-            <label for="phoneNumber" class="form-label"
-              >Địa chỉ (<span class="text-danger">*</span>):</label
-            >
+            <label for="address" class="form-label">Địa chỉ:</label>
             <input
               type="text"
               id="address"
@@ -172,6 +170,11 @@
       integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
       crossorigin="anonymous"
     ></script>
+    <script>
+      window.extAsyncInit = function () {
+        // Mọi logic gọi MessengerExtensions phải ở đây
+      };
+    </script>
     <script src="https://connect.facebook.net/en_US/messenger.Extensions.js"></script>
     <script src="/js/reserve-schedule.js"></script>
   </body>

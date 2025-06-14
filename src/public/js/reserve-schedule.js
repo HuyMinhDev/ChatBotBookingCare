@@ -10,6 +10,9 @@ console.log("JS đã được load");
   js.src = "https://connect.facebook.net/en_US/messenger.Extensions.js";
   fjs.parentNode.insertBefore(js, fjs);
 })(document, "script", "Messenger");
+$(document).ready(function () {
+  handleClickButtonReserveSchedule();
+});
 window.extAsyncInit = function () {
   // Messenger Extensions will be available here
   MessengerExtensions.getContext(
@@ -18,7 +21,7 @@ window.extAsyncInit = function () {
       // success
       //set psid to input
       $("#psid").val(thread_context.psid);
-      handleClickButtonReserveSchedule();
+      //   handleClickButtonReserveSchedule();
     },
     function error(err) {
       // error
