@@ -271,6 +271,7 @@ async function handlePostback(sender_psid, received_postback) {
     case "SHOW_ROOMS":
       await chatbotService.handleShowDetailRooms(sender_psid);
       break;
+
     default:
       response = { text: `Unknown postback payload. ${payload}` };
   }
@@ -454,10 +455,14 @@ let setupPersistentMenu = async (req, res) => {
   return res.send("Setup persistent menu successfully!");
 };
 
+let handleReserveSchedule = (req, res) => {
+  return res.render("reserve-schedule.ejs");
+};
 module.exports = {
   getHomePage: getHomePage,
   postWebhook: postWebhook,
   getWebhook: getWebhook,
   // setupProfile: setupProfile,
   setupPersistentMenu: setupPersistentMenu,
+  handleReserveSchedule: handleReserveSchedule,
 };

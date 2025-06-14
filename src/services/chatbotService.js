@@ -249,9 +249,11 @@ let sendGetStartedTemplate = (sender_psid) => {
             image_url: IMAGE_GUIDE_TO_USE_BOT,
             buttons: [
               {
-                type: "postback",
-                title: "Đặt lịch khám",
-                payload: "RESERVE_SCHEDULE",
+                type: "web_url",
+                url: `${process.env.URL_WEB_VIEW_ORDER}`,
+                title: "Đặt Lịch Khám Bệnh",
+                webview_height_ratio: "tall",
+                messenger_extensions: true,
               },
               {
                 type: "postback",
@@ -332,9 +334,11 @@ let getMainMenuTemplate = (sender_psid) => {
             image_url: IMAGE_GUIDE_TO_USE_BOT,
             buttons: [
               {
-                type: "postback",
-                title: "Đặt lịch khám",
-                payload: "RESERVE_SCHEDULE",
+                type: "web_url",
+                url: `${process.env.URL_WEB_VIEW_ORDER}`,
+                title: "Đặt Lịch Khám Bệnh",
+                webview_height_ratio: "tall",
+                messenger_extensions: true,
               },
             ],
           },
@@ -414,9 +418,11 @@ let getMainMenuClinicTemplate = (sender_psid) => {
             image_url: IMAGE_GUIDE_TO_USE_BOT,
             buttons: [
               {
-                type: "postback",
-                title: "Đặt lịch khám",
-                payload: "RESERVE_SCHEDULE",
+                type: "web_url",
+                url: `${process.env.URL_WEB_VIEW_ORDER}`,
+                title: "Đặt Lịch Khám Bệnh",
+                webview_height_ratio: "tall",
+                messenger_extensions: true,
               },
             ],
           },
