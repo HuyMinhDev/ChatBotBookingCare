@@ -25,3 +25,5 @@ window.extAsyncInit = function () {
     }
   );
 };
+
+function handleClickButtonReserveSchedule() {}
