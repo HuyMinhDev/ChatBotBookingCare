@@ -1,41 +1,29 @@
-body,
-html {
+html,
+body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  background-color: #f8f9fa;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff;
+  border: none;
+  box-shadow: none;
+}
+
+.container,
+.container * {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
 }
 
 .fix-height {
-  padding: 24px 12px;
+  min-height: 100vh;
+  background-color: #fff;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 20px;
 }
 
-.form-control,
-.form-check-input {
-  border-radius: 10px;
-}
-
-.btn-primary {
-  width: 100%;
-  border-radius: 12px;
-  padding: 12px;
-  font-weight: 600;
-  font-size: 16px;
-}
-
-footer {
-  font-size: 14px;
-  color: #6c757d;
-}
-
-.title {
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 16px;
-  display: block;
-}
-
-label {
-  font-weight: 500;
+/* Xóa viền nếu Messenger WebView bao iframe */
+iframe {
+  border: none !important;
+  box-shadow: none !important;
 }
