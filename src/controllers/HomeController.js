@@ -513,7 +513,7 @@ let handleReserveSchedule = (req, res) => {
 //     });
 //   }
 // };
-let handlePostReserveTable = async (req, res) => {
+let handlePostReserveSchedule = async (req, res) => {
   try {
     const {
       psid,
@@ -561,5 +561,5 @@ module.exports = {
   setupProfile: setupProfile,
   setupPersistentMenu: setupPersistentMenu,
   handleReserveSchedule: handleReserveSchedule,
-  handlePostReserveTable: handlePostReserveTable,
+  handlePostReserveSchedule: handlePostReserveSchedule,
 };

@@ -12,7 +12,10 @@ let initWebRoutes = (app) => {
   router.post("/webhook", HomeController.postWebhook);
   router.get("/webhook", HomeController.getWebhook);
   router.get("/reserve-schedule", HomeController.handleReserveSchedule);
-  router.post("/reserve-schedule-ajax", HomeController.handlePostReserveTable);
+  router.post(
+    "/reserve-schedule-ajax",
+    HomeController.handlePostReserveSchedule
+  );
   return app.use("/", router);
 };
 module.exports = initWebRoutes;
