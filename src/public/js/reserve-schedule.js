@@ -10,9 +10,9 @@ console.log("JS đã được load");
   js.src = "https://connect.facebook.net/en_US/messenger.Extensions.js";
   fjs.parentNode.insertBefore(js, fjs);
 })(document, "script", "Messenger");
-$(document).ready(function () {
-  handleClickButtonReserveSchedule();
-});
+// $(document).ready(function () {
+//   handleClickButtonReserveSchedule();
+// });
 window.extAsyncInit = function () {
   // Messenger Extensions will be available here
   MessengerExtensions.getContext(
@@ -21,11 +21,12 @@ window.extAsyncInit = function () {
       // success
       //set psid to input
       $("#psid").val(thread_context.psid);
-      //   handleClickButtonReserveSchedule();
+      console.log("Lấy PSID thành công:", thread_context.psid);
+      handleClickButtonReserveSchedule();
     },
     function error(err) {
       // error
-      console.log("Lỗi đặt bàn Eric bot", err);
+      console.error("Lỗi getContext thất bại:", err);
     }
   );
 };
