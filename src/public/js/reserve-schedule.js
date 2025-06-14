@@ -9,3 +9,6 @@
   js.src = "https://connect.facebook.net/en_US/messenger.Extensions.js";
   fjs.parentNode.insertBefore(js, fjs);
 })(document, "script", "Messenger");
+window.extAsyncInit = function () {
+  // Messenger Extensions will be available here
+};

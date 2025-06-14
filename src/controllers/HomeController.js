@@ -401,7 +401,33 @@ function callSendAPI(sender_psid, response) {
 //   );
 //   return res.send("Setup profile successfully!");
 // };
+let setupProfile = async (req, res) => {
+  // Gửi yêu cầu cấu hình Profile API của Facebook Messenger
+  let request_body = {
+    get_started: {
+      payload: "GET_STARTED",
+    },
+    whitelisted_domains: ["https://chatbotbookingcare.onrender.com"],
+  };
 
+  // Gửi HTTP request đến Facebook Graph API
+  await request(
+    {
+      uri: `https://graph.facebook.com/v21.0/me/messenger_profile`,
+      qs: { access_token: PAGE_ACCESS_TOKEN },
+      method: "POST",
+      json: request_body,
+    },
+    (err, response, body) => {
+      console.log("Setup profile response:", body);
+      if (!err) {
+        console.log("Cấu hình Messenger profile thành công!");
+      } else {
+        console.error("Lỗi khi cấu hình profile:", err);
+      }
+    }
+  );
+};
 let setupPersistentMenu = async (req, res) => {
   // call profile FB API
   let request_body = {
@@ -462,7 +488,7 @@ module.exports = {
   getHomePage: getHomePage,
   postWebhook: postWebhook,
   getWebhook: getWebhook,
-  // setupProfile: setupProfile,
+  setupProfile: setupProfile,
   setupPersistentMenu: setupPersistentMenu,
   handleReserveSchedule: handleReserveSchedule,
 };
