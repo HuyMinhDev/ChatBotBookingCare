@@ -427,6 +427,7 @@ let setupProfile = async (req, res) => {
       }
     }
   );
+  return res.send("Cấu hình Messenger profile thành công!");
 };
 let setupPersistentMenu = async (req, res) => {
   // call profile FB API
