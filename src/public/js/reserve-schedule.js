@@ -11,4 +11,13 @@
 })(document, "script", "Messenger");
 window.extAsyncInit = function () {
   // Messenger Extensions will be available here
+  MessengerExtensions.getContext(
+    "YOUR_APP_ID",
+    function success(thread_context) {
+      // success
+    },
+    function error(err) {
+      // error
+    }
+  );
 };

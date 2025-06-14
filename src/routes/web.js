@@ -5,7 +5,7 @@ let router = express.Router();
 let initWebRoutes = (app) => {
   router.get("/", HomeController.getHomePage);
   // Setup profile
-  // router.post("/setup-profile", HomeController.setupProfile);
+  router.post("/setup-profile", HomeController.setupProfile);
   // Setup persistent menu
   router.post("/setup-persistent-menu", HomeController.setupPersistentMenu);
 
