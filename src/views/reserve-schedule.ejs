@@ -17,8 +17,22 @@
       crossorigin="anonymous"
     />
     <style>
-      iframe#u_0_0_SE {
-        border: none;
+      /* Ẩn border của iframe Messenger */
+      .fb-customerchat iframe,
+      .fb_customer_chat_bounce_out_v2 iframe,
+      .fb_iframe_widget iframe,
+      iframe[name="messenger_ref"] {
+        border: none !important;
+        box-shadow: none !important;
+        outline: none !important;
+      }
+
+      /* Nếu vẫn có viền do div bao ngoài */
+      .fb-customerchat,
+      .fb_iframe_widget,
+      .fb_customer_chat_bounce_out_v2 {
+        border: none !important;
+        box-shadow: none !important;
       }
     </style>
     <link rel="stylesheet" href="../public/css/style.css" />
