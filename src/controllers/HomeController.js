@@ -485,6 +485,75 @@ let setupPersistentMenu = async (req, res) => {
 let handleReserveSchedule = (req, res) => {
   return res.render("reserve-schedule.ejs");
 };
+
+// let handlePostReserveTable = async (req, res) => {
+//   try {
+//     let customerName = "";
+//     if (req.body.customerName === "") {
+//       customerName = "Để trống";
+//     } else {
+//       customerName = req.body.customerName;
+//     }
+//     let response1 = {
+//       text: `---Thông tin khách hàng đặt lịch---
+//       \nHọ và tên: ${customerName}
+//       \nEmail: ${req.body.email}
+//       \nSố điện thoại: ${req.body.phoneNumber}`,
+//     };
+
+//     await chatbotService.sendMessage(req.body.psid, response1);
+
+//     return res.status(200).json({
+//       message: "ok",
+//     });
+//   } catch (e) {
+//     console.log("Lỗi post reserve table: ", e);
+//     return res.status(500).json({
+//       message: "Server error",
+//     });
+//   }
+// };
+let handlePostReserveTable = async (req, res) => {
+  try {
+    const {
+      psid,
+      customerName = "",
+      email = "",
+      phoneNumber = "",
+      address = "",
+      gender = "",
+      birthday = "",
+    } = req.body;
+
+    // Nếu customerName trống thì thay bằng "Để trống"
+    const finalName = customerName.trim() === "" ? "Để trống" : customerName;
+
+    const response1 = {
+      text: `---Thông tin khách hàng đặt lịch---
+      Họ và tên: ${finalName}
+      Email: ${email}
+      Số điện thoại: ${phoneNumber}
+      Địa chỉ: ${address}
+      Giới tính: ${
+        gender === "male" ? "Nam" : gender === "female" ? "Nữ" : "Chưa chọn"
+      }
+      Ngày sinh: ${birthday || "Chưa chọn"}
+      `,
+    };
+
+    await chatbotService.callSendAPI(psid, response1);
+
+    return res.status(200).json({
+      message: "ok",
+    });
+  } catch (e) {
+    console.error("Lỗi post reserve table: ", e);
+    return res.status(500).json({
+      message: "Server error",
+    });
+  }
+};
+
 module.exports = {
   getHomePage: getHomePage,
   postWebhook: postWebhook,
@@ -492,4 +561,5 @@ module.exports = {
   setupProfile: setupProfile,
   setupPersistentMenu: setupPersistentMenu,
   handleReserveSchedule: handleReserveSchedule,
+  handlePostReserveTable: handlePostReserveTable,
 };
