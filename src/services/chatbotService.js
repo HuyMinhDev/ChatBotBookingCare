@@ -180,40 +180,7 @@ let sendGetStartedTemplate = (sender_psid) => {
       type: "template",
       payload: {
         template_type: "generic",
-        // elements: [
-        //   {
-        //     title: "Xin chào bạn đến với website BookingCare của chúng tôi!",
-        //     subtitle: "Dưới đây là một số lựa chọn dành cho bạn",
-        //     image_url: IMAGE_GET_STARTED,
-        //     buttons: [
-        //       {
-        //         type: "postback",
-        //         title: "CHUYÊN KHOA",
-        //         payload: "MAIN_SPECIALTY",
-        //       },
-        //       {
-        //         type: "postback",
-        //         title: "BÁC SĨ",
-        //         payload: "MAIN_DOCTOR",
-        //       },
-        //       {
-        //         type: "postback",
-        //         title: "CƠ SỞ Y TẾ",
-        //         payload: "MAIN_CLINIC",
-        //       },
-        //       {
-        //         type: "postback",
-        //         title: "Đặt lịch khám",
-        //         payload: "RESERVE_SCHEDULE",
-        //       },
-        //       {
-        //         type: "postback",
-        //         title: "HƯỚNG DẪN SỬ DỤNG BOT",
-        //         payload: "GUIDE_TO_USE_BOT",
-        //       },
-        //     ],
-        //   },
-        // ],
+
         elements: [
           {
             title: "Xin chào bạn đến với BookingCare!",
