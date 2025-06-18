@@ -1,42 +1,27 @@
 require("dotenv").config();
+const { Configuration, OpenAIApi } = require("openai");
 
-import OpenAI from "openai";
-import fetch, { Headers } from "node-fetch";
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
-if (!globalThis.Headers) {
-  globalThis.Headers = Headers;
-}
-
-let openaiInstance;
-
-const initOpenAI = async () => {
-  const { default: Blob } = await import("fetch-blob");
-  if (!globalThis.Blob) {
-    globalThis.Blob = Blob;
-  }
-
-  openaiInstance = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-    fetch: fetch,
-  });
-};
+const openai = new OpenAIApi(configuration);
 
 const askChatGPT = async (userMessage) => {
-  if (!openaiInstance) {
-    await initOpenAI(); // chỉ khởi tạo khi cần
-  }
-
   try {
-    const response = await openaiInstance.chat.completions.create({
+    const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [{ role: "user", content: userMessage }],
     });
 
-    return response.choices[0].message.content;
+    return response.data.choices[0].message.content;
   } catch (error) {
-    console.error("OpenAI error:", error);
-    return "Có lỗi xảy ra khi gọi ChatGPT.";
+    console.error(
+      "❌ Lỗi khi gọi OpenAI:",
+      error?.response?.data || error.message
+    );
+    return "Xin lỗi, đã có lỗi xảy ra khi gọi ChatGPT.";
   }
 };
 
-export default { askChatGPT };
+module.exports = { askChatGPT };
