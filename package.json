@@ -17,6 +17,7 @@
   "author": "MinhHuy",
   "license": "ISC",
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
