@@ -1,5 +1,14 @@
 require("dotenv").config();
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { fetch, Headers, Request, Response } from "undici";
+
+// ✅ Polyfill fetch cho Node.js < 18
+if (!globalThis.fetch) {
+  globalThis.fetch = fetch;
+  globalThis.Headers = Headers;
+  globalThis.Request = Request;
+  globalThis.Response = Response;
+}
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
@@ -15,4 +24,4 @@ const askGemini = async (userMessage) => {
   }
 };
 
-module.exports = { askGemini };
+export default { askGemini };
